@@ -5,7 +5,7 @@ namespace ChronoUtils
 {
     public static class Chrono
     {
-        public static TimeSpan MeasureTime(Action action)
+        public static TimeSpan Measure(Action action)
         {    
             Stopwatch sw = Stopwatch.StartNew();
             action();
@@ -13,7 +13,7 @@ namespace ChronoUtils
             return sw.Elapsed;
         }
 
-        public static T MeasureTime<T>(Func<T> func, out TimeSpan elapsed)
+        public static T Measure<T>(Func<T> func, out TimeSpan elapsed)
         {
             Stopwatch sw = Stopwatch.StartNew();
             var result = func();

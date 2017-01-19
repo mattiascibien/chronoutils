@@ -1,14 +1,36 @@
 ﻿using ChronoUtils;
+using System;
 using Xunit;
 
 namespace Tests
 {
     public class Tests
     {
-        [Fact]
-        public void Test1() 
+        public void SleepFor(TimeSpan timeSpan)
         {
-            Assert.True(true);
+            System.Threading.Thread.Sleep((int)timeSpan.TotalMilliseconds);
+        }
+
+        public int SleepForAndReturnInt(TimeSpan timeSpan)
+        {
+            SleepFor(timeSpan);
+            return 5;
+        }
+
+        [Fact]
+        public void CorrectMeasureAction() 
+        {
+            TimeSpan timePassed = Chrono.Measure(() => SleepFor(TimeSpan.FromMilliseconds(5000)));
+            Assert.True(timePassed.TotalMilliseconds >= 5000);
+        }
+
+        [Fact]
+        public void CorrectMeasureFunc() 
+        {
+            TimeSpan timePassed;
+            int result = Chrono.Measure(() => SleepForAndReturnInt(TimeSpan.FromMilliseconds(5000)), out timePassed);
+            Assert.True(timePassed.TotalMilliseconds >= 5000);
+            Assert.Equal(5, result);
         }
     }
 }
