@@ -2,12 +2,12 @@ language: csharp
 dist: trusty
 sudo: required
 mono: none
-dotnet: 1.0.0-preview2-003121
+dotnet: 1.0.0-preview2-003131
 
 install:
     - export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
 script:
-    - dotnet restore
+    - dotnet restore 
     - dotnet test
-    - dotnet build -c Release
+    - dotnet build ChronoUtils/project.json -c Release
