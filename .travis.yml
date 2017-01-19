@@ -9,5 +9,5 @@ install:
 
 script:
     - dotnet restore 
-    - dotnet test
+    - dotnet test ChronoUtils.Tests/project.json
     - dotnet build ChronoUtils/project.json -c Release
